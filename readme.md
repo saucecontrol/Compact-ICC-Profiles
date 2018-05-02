@@ -24,7 +24,7 @@ These profiles are defined using the true sRGB primaries, as defined in both the
 In addition to the usual V2 variants, I have created a `-nano` version of this profile.  This was done partially as an exercise to determine the minimum size for a useable sRGB-compatible profile and partially because sRGB is a special case where an extra-small profile may be useful.
 
 | File Name | File Size | Description String | Notes |
-|--|--|--|--|--|
+|--|--|--|--|
 | sRGB-v2-nano.icc  | 410 bytes | nRGB | 20-Point Curve |
 | sRGB-v2-micro.icc | 456 bytes | uRGB | 42-Point Curve |
 | sRGB-v2-magic.icc | 796 bytes | sRGB | 212-Point Curve |
@@ -37,7 +37,7 @@ The Display P3 color space is based on the [DCI-P3 D65](https://en.wikipedia.org
 Note: this profile is not strictly ICC-compliant, as the P3 color space requires a negative Z value for the red primary when adapted to the profile illuminant.  While most modern software will handle this correctly, it may cause issues with software that adheres strictly to the ICC specs.  You have been warned.
 
 | File Name | File Size | Description String | Notes |
-|--|--|--|--|--|
+|--|--|--|--|
 | DisplayP3-v2-micro.icc | 456 bytes | uP3 | 42-Point Curve |
 | DisplayP3-v2-magic.icc | 796 bytes | sP3 | 212-Point Curve |
 | DisplayP3-v4.icc       | 480 bytes | sP3 | Parametric Curve |
@@ -45,7 +45,7 @@ Note: this profile is not strictly ICC-compliant, as the P3 color space requires
 ### ProPhoto RGB (ROMM RGB)
 
 | File Name | File Size | Description String | Notes |
-|--|--|--|--|--|
+|--|--|--|--|
 | ProPhoto-v2-micro.icc | 496 bytes | uROM | 62-Point Curve |
 | ProPhoto-v2-magic.icc | 756 bytes | ROMM | 192-Point Curve |
 | ProPhoto-v4.icc       | 480 bytes | ROMM | Parametric Curve |
@@ -53,7 +53,7 @@ Note: this profile is not strictly ICC-compliant, as the P3 color space requires
 ### Rec. 709
 
 | File Name | File Size | Description String | Notes |
-|--|--|--|--|--|
+|--|--|--|--|
 | Rec709-v2-micro.icc | 460 bytes | u709 | 44-Point Curve |
 | Rec709-v2-magic.icc | 738 bytes | R709 | 183-Point Curve |
 | Rec709-v4.icc       | 480 bytes | R709 | Parametric Curve |
@@ -63,7 +63,7 @@ Note: this profile is not strictly ICC-compliant, as the P3 color space requires
 Note: this profile is not strictly ICC-compliant, as the [Rec. 2020](https://en.wikipedia.org/wiki/Rec._2020) color space requires a negative Z value for the red primary when adapted to the profile illuminant.  While most modern software will handle this correctly, it may cause issues with software that adheres strictly to the ICC specs.  You have been warned.
 
 | File Name | File Size | Description String | Notes |
-|--|--|--|--|--|
+|--|--|--|--|
 | Rec2020-v2-micro.icc | 460 bytes | u202 | 44-Point Curve |
 | Rec2020-v2-magic.icc | 790 bytes | 2020 | 209-Point Curve |
 | Rec2020-v4.icc       | 480 bytes | 2020 | Parametric Curve |
@@ -75,7 +75,7 @@ These profiles are compact versions of commonly-used Adobe-created color spaces.
 The primary colorants and whitepoint values in these profiles were adapted from the published x,y chromaticity coordinates and then tested for compatibility with the Adobe-created profiles.  Most of Adobe's ICC profiles are [well-behaved](https://ninedegreesbelow.com/photography/well-behaved-profile.html), but in cases where they are not, these compatible profiles have very slightly different primaries to bring them into balance.  No values deviate from those in the Adobe profiles by more than 1/65536.
 
 | File Name | File Size | Description String | Color Space |
-|--|--|--|--|--|
+|--|--|--|--|
 | AdobeCompat-v2.icc      | 374 bytes | A98C | [Adobe RGB (1998)](https://en.wikipedia.org/wiki/Adobe_RGB_color_space) |
 | AppleCompat-v2.icc      | 374 bytes | AAPL | [Apple RGB](http://www.brucelindbloom.com/WorkingSpaceInfo.html) |
 | ColorMatchCompat-v2.icc | 374 bytes | ACMC | [ColorMatch RGB](http://www.brucelindbloom.com/WorkingSpaceInfo.html) |
