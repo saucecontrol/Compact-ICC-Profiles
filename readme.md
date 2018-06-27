@@ -30,11 +30,36 @@ In addition to the usual V2 variants, I have created a `-nano` version of this p
 | sRGB-v2-magic.icc | 796 bytes | sRGB | 212-Point Curve |
 | sRGB-v4.icc       | 480 bytes | sRGB | Parametric Curve |
 
+### Greyscale
+
+These are greyscale versions of the sRGB profiles, with the same TRCs and white point.
+
+| File Name | File Size | Description String | Notes |
+|--|--|--|--|
+| sGrey-v2-nano.icc  | 290 bytes | nGry | 20-Point Curve |
+| sGrey-v2-micro.icc | 336 bytes | uGry | 42-Point Curve |
+| sGrey-v2-magic.icc | 676 bytes | sGry | 212-Point Curve |
+| sGrey-v4.icc       | 360 bytes | sGry | Parametric Curve |
+
 ### Display P3
 
-The Display P3 color space is based on the [DCI-P3 D65](https://en.wikipedia.org/wiki/DCI-P3) color space but uses an sRGB TRC rather than the standard constant gamma of 2.6.  This color space is [commonly](https://blog.conradchavez.com/2015/10/26/a-look-at-the-p3-color-gamut-of-the-imac-display-retina-late-2015/) [used](https://www.anandtech.com/show/10265/understanding-the-97-ipad-pros-true-tone-display) as a display profile on newer wide-gamut displays.
+The Display P3 color space is based on the [DCI-P3 D65](https://en.wikipedia.org/wiki/DCI-P3) color space but uses an sRGB TRC rather than the standard constant gamma of 2.6.  This color space is becoming [commonly](https://blog.conradchavez.com/2015/10/26/a-look-at-the-p3-color-gamut-of-the-imac-display-retina-late-2015/) [used](https://www.anandtech.com/show/10265/understanding-the-97-ipad-pros-true-tone-display) as a display profile on newer wide-gamut displays.
 
-Note: this profile is not strictly ICC-compliant, as the P3 color space requires a negative Z value for the red primary when adapted to the profile illuminant.  While most modern software will handle this correctly, it may cause issues with software that adheres strictly to the ICC specs.  You have been warned.
+Note: The P3 color space requires a negative Z value for the red primary when adapted to the profile illuminant, which is not allowed according the the ICC spec.  While most software will handle the negative value correctly, it may cause issues with software that adheres strictly to the ICC specs, including popular web browsers.  Chrome and Firefox [recently relaxed those restrictions](https://bugzilla.mozilla.org/show_bug.cgi?format=default&id=1250461), but only on Apple platforms.
+
+#### Max-Compatibility
+
+These profiles have the red Z value nudged up to 0, with adjustments made to the other colors to compensate and restore balance.  Use these if you're not sure of compatibility.
+
+| File Name | File Size | Description String | Notes |
+|--|--|--|--|
+| DisplayP3Compat-v2-micro.icc | 456 bytes | uP3C | 42-Point Curve |
+| DisplayP3Compat-v2-magic.icc | 796 bytes | sP3C | 212-Point Curve |
+| DisplayP3Compat-v4.icc       | 480 bytes | sP3C | Parametric Curve |
+
+#### Max-Correctness
+
+These profiles use the correct negative Z value for the profile-adapted red primary.
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
@@ -60,7 +85,21 @@ Note: this profile is not strictly ICC-compliant, as the P3 color space requires
 
 ### Rec. 2020
 
-Note: this profile is not strictly ICC-compliant, as the [Rec. 2020](https://en.wikipedia.org/wiki/Rec._2020) color space requires a negative Z value for the red primary when adapted to the profile illuminant.  While most modern software will handle this correctly, it may cause issues with software that adheres strictly to the ICC specs.  You have been warned.
+Note: The [Rec. 2020](https://en.wikipedia.org/wiki/Rec._2020) color space requires a negative Z value for the red primary when adapted to the profile illuminant, which is not allowed according to the ICC spec.  While most software will handle the negative value correctly, it may cause issues with software that adheres strictly to the ICC specs, including popular web browsers.  Chrome and Firefox [recently relaxed those restrictions](https://bugzilla.mozilla.org/show_bug.cgi?format=default&id=1250461), but only on Apple platforms.
+
+#### Max-Compatibility
+
+These profiles have the red Z value nudged up to 0, with adjustments made to the other colors to compensate and restore balance.  Use these if you're not sure of compatibility.
+
+| File Name | File Size | Description String | Notes |
+|--|--|--|--|
+| Rec2020Compat-v2-micro.icc | 460 bytes | u20C | 44-Point Curve |
+| Rec2020Compat-v2-magic.icc | 790 bytes | 202C | 209-Point Curve |
+| Rec2020Compat-v4.icc       | 480 bytes | 202C | Parametric Curve |
+
+#### Max-Correctness
+
+These profiles use the correct negative Z value for the profile-adapted red primary.
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
@@ -70,7 +109,7 @@ Note: this profile is not strictly ICC-compliant, as the [Rec. 2020](https://en.
 
 ### Adobe Compatible
 
-These profiles are compact versions of commonly-used Adobe-created color spaces.  Because these color spaces all use constant gamma values, the Adobe versions of the profiles are quite small.  However, with custom packing and abbreviated text tags, these profiles are almost 200 bytes smaller.  They are also free of the license restrictions placed on the Adobe-provided profiles.
+These profiles are compact versions of commonly-used Adobe-created color spaces.  Because these color spaces all use constant gamma values, the Adobe versions of the profiles are quite small.  However, with custom packing and abbreviated text tags, these profiles are almost 200 bytes smaller.  They are also free of the license restrictions that burden the Adobe-provided profiles.
 
 The primary colorants and whitepoint values in these profiles were adapted from the published x,y chromaticity coordinates and then tested for compatibility with the Adobe-created profiles.  Most of Adobe's ICC profiles are [well-behaved](https://ninedegreesbelow.com/photography/well-behaved-profile.html), but in cases where they are not, these compatible profiles have very slightly different primaries to bring them into balance.  No values deviate from those in the Adobe profiles by more than 1/65536.
 
