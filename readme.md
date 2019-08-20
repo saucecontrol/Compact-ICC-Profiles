@@ -12,7 +12,9 @@ Conventions
 
 For color spaces that use a constant gamma value, only a single ICC V2 profile is provided.  V4 profiles offer no accuracy advantage in this case, V2 profiles can be made smaller, and V2 has better software support.
 
-For color spaces that have complex tone reproduction curves (TRCs), I have provided multiple options.  These color spaces are best represented using the newer V4 parametric curve type, so if you know the software reading the image is V4 compatible, those are the best choice.  For the V2 profiles, I have created two variants: `-micro` and `-magic`.  The `-micro` version of the profile uses a TRC that is balanced between accuracy and size and should be more than adequate for any 8-bit per channel images (e.g. JPEG).  For more accuracy, the `-magic` version of the profile uses a TRC with a larger number of points while still being significantly smaller than the standard profiles that use 1024 curve points.  These curves have been tuned so that in many cases they will give greater accuracy than the standard TRCs despite the smaller size, hence the name: magic.
+For color spaces that have complex tone reproduction curves (TRCs), I have provided multiple options.  These color spaces are best represented using the newer V4 parametric curve type, so if you know the software reading the image is V4 compatible, those are the best choice.  For the V2 profiles, I have created two variants: `-micro` and `-magic`.
+
+The `-micro` version of the profile uses a TRC that is balanced between accuracy and size and should be more than adequate for any 8-bit per channel images (e.g. JPEG).  For more accuracy, the `-magic` version of the profile uses a TRC with a larger number of points while still being significantly smaller than the standard profiles that use 1024 curve points.  These curves have been tuned so that in many cases they will give greater accuracy than the standard TRCs despite the smaller size, hence the name: magic.
 
 Profiles in this Collection
 ---------------------------
@@ -23,7 +25,7 @@ These profiles are defined using the true sRGB primaries, as defined in both the
 
 In addition to the usual V2 variants, I have created a `-nano` version of the sRGB profile.  This was done partially as an exercise to determine the minimum size for a useable sRGB-compatible profile and partially because sRGB is a special case where an extra-small profile may be useful.
 
-The scRGB color space uses the same primaries as sRGB but with a linear curve.  It defines an expanded gamut by means of encoding pixel values outside the normal range of [0-1].
+The scRGB color space uses the same primaries as sRGB but with a linear curve.  It defines an expanded gamut by means of encoding pixel values outside the normal range of [0-1].  It should be used only with images that are encoded in linear RGB with at least 16 bits per channel.
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
@@ -53,7 +55,7 @@ Note: The P3 color space requires a negative Z value for the red primary when ad
 
 #### Max-Compatibility
 
-These profiles have the red Z value nudged up to 0, with adjustments made to the other colors to compensate and restore balance.  Use these if you're not sure of compatibility or if you are displaying the images in a web browser.
+These profiles have the red Z value nudged up to 0, with adjustments made to the other colors to compensate and restore balance.  Use these if you're not sure of compatibility or if the images are intended to be displayed in a web browser.
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
@@ -73,13 +75,17 @@ These profiles use the correct negative Z value for the profile-adapted red prim
 
 ### ProPhoto RGB (ROMM RGB)
 
+[ProPhoto](https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space) is an extremely wide gamut color space and should be used only for images encoded with at least 16 bits per pixel.  The `-micro` curve for this color space is larger than others to ensure greater accuracy in these higher bit depth files.
+
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
 | [ProPhoto-v2-micro.icc](profiles/ProPhoto-v2-micro.icc?raw=true) | 496 bytes | uROM | 62-Point Curve |
 | [ProPhoto-v2-magic.icc](profiles/ProPhoto-v2-magic.icc?raw=true) | 756 bytes | ROMM | 192-Point Curve |
 | [ProPhoto-v4.icc](profiles/ProPhoto-v4.icc?raw=true)             | 480 bytes | ROMM | Parametric Curve |
 
-### Rec. 709
+### Rec. 709 (BT.709)
+
+[Rec. 709](https://en.wikipedia.org/wiki/Rec._709) is a color space created for video but occasionally appears in image files.  Note that although the color primaries are *very* similar to sRGB, Rec. 709 uses a different transfer curve, so these color spaces are not interchangeable.
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
@@ -93,7 +99,7 @@ Note: The [Rec. 2020](https://en.wikipedia.org/wiki/Rec._2020) color space requi
 
 #### Max-Compatibility
 
-These profiles have the red Z value nudged up to 0, with adjustments made to the other colors to compensate and restore balance.  Use these if you're not sure of compatibility or if you are displaying the images in a web browser.
+These profiles have the red Z value nudged up to 0, with adjustments made to the other colors to compensate and restore balance.  Use these if you're not sure of compatibility or if the images are intended to be displayed in a web browser.
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
