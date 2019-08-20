@@ -115,7 +115,7 @@ These profiles use the correct negative Z value for the profile-adapted red prim
 
 These profiles are compact versions of commonly used Adobe-created color spaces.  Because these color spaces all use constant gamma values, the Adobe versions of the profiles are quite small.  However, with custom packing and abbreviated text tags, these profiles are almost 200 bytes smaller.  They are also free of the license restrictions that burden Adobe's versions of the profiles.
 
-The primary colorants and whitepoint values in these profiles were adapted from the published x,y chromaticity coordinates and then tested for compatibility with the Adobe profiles.  Most of Adobe's ICC profiles are [well-behaved](https://ninedegreesbelow.com/photography/well-behaved-profile.html), but in cases where they are not, these compatible profiles have very slightly different primaries to bring them into balance.  No values deviate from those in the Adobe profiles by more than 1/2^16^.
+The primary colorants and whitepoint values in these profiles were adapted from the published x,y chromaticity coordinates and then tested for compatibility with the Adobe profiles.  Most of Adobe's ICC profiles are [well-behaved](https://ninedegreesbelow.com/photography/well-behaved-profile.html), but in cases where they are not, these compatible profiles have very slightly different primaries to bring them into balance.  No values deviate from those in the Adobe profiles by more than 1/2<sup>16</sup>.
 
 | File Name | File Size | Description String | Color Space |
 |--|--|--|--|
