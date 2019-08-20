@@ -3,7 +3,7 @@ Compact ICC Profiles
 
 The ICC profiles in this collection contain the minimum tags necessary to correctly represent a color space and, in the case of ICC V2 profiles, custom packing to mimimize file size.  These profiles are intended for embedding in image files where the size of the profile is a consideration.
 
-Profile description and copyright text are minimal.  All profiles in this collection are licensed under the Creative Commons CC0 license.  They are free from restrictions on distribution and use to the extent allowed by law.
+Profile description and copyright text are minimal.  All profiles in this collection are released to the public domain under the Creative Commons CC0 license.  They are free from restrictions on distribution and use to the extent allowed by law.
 
 Details on the process used for creating these profiles can be found [here](https://photosauce.net/blog/post/making-a-minimal-srgb-icc-profile-part-1-trim-the-fat-abuse-the-spec)
 
@@ -12,23 +12,27 @@ Conventions
 
 For color spaces that use a constant gamma value, only a single ICC V2 profile is provided.  V4 profiles offer no accuracy advantage in this case, V2 profiles can be made smaller, and V2 has better software support.
 
-For color spaces that have complex tone reproduction curves (TRCs), I have provided multiple options.  These color spaces are best represented using the newer V4 parametric curve type, so if you know the software reading the image is V4 compatible, those are the best choice.  For the V2 profiles, I have created two variants: `-micro` and `-magic`.  The `-micro` version of the profile uses a TRC that is balanced between accuracy and size and should be adequate for any 8bpc images.  For more accuracy, the `-magic` version of the profile uses a TRC with a larger number of points while still being significantly smaller than the standard profiles that use 1024 curve points.  These curves have been tuned so that in many cases they will give greater accuracy than the standard TRCs despite the smaller size, hence the name: magic.
+For color spaces that have complex tone reproduction curves (TRCs), I have provided multiple options.  These color spaces are best represented using the newer V4 parametric curve type, so if you know the software reading the image is V4 compatible, those are the best choice.  For the V2 profiles, I have created two variants: `-micro` and `-magic`.  The `-micro` version of the profile uses a TRC that is balanced between accuracy and size and should be adequate for any 8-bit per channel images.  For more accuracy, the `-magic` version of the profile uses a TRC with a larger number of points while still being significantly smaller than the standard profiles that use 1024 curve points.  These curves have been tuned so that in many cases they will give greater accuracy than the standard TRCs despite the smaller size, hence the name: magic.
 
 Profiles in this Collection
 ---------------------------
 
-### sRGB
+### sRGB/scRGB
 
-These profiles are defined using the true sRGB primaries, as defined in both the sRGB and scRGB standards.  They differ very slightly from profiles derived from the Rec. 709 primaries, which are commonly given as sRGB.
+These profiles are defined using the true sRGB primaries, as defined in both the sRGB and scRGB standards, using the process defined in the [ICC's extension spec for sRGB profile makers](http://www.color.org/chardata/rgb/sRGB.pdf).  The values in these profiles differ very slightly from those in profiles derived from the Rec. 709 primaries, which are commonly given as sRGB.
 
-In addition to the usual V2 variants, I have created a `-nano` version of this profile.  This was done partially as an exercise to determine the minimum size for a useable sRGB-compatible profile and partially because sRGB is a special case where an extra-small profile may be useful.
+In addition to the usual V2 variants, I have created a `-nano` version of the sRGB profile.  This was done partially as an exercise to determine the minimum size for a useable sRGB-compatible profile and partially because sRGB is a special case where an extra-small profile may be useful.
+
+The scRGB color space uses the same primaries as sRGB but with a linear curve.  It defines an expanded gamut by means of encoding values outside the normal range of [0-1].
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
-| sRGB-v2-nano.icc  | 410 bytes | nRGB | 20-Point Curve |
-| sRGB-v2-micro.icc | 456 bytes | uRGB | 42-Point Curve |
-| sRGB-v2-magic.icc | 796 bytes | sRGB | 212-Point Curve |
-| sRGB-v4.icc       | 480 bytes | sRGB | Parametric Curve |
+| [sRGB-v2-nano.icc](profiles/sRGB-v2-nano.icc?raw=true)   | 410 bytes | nRGB | 20-Point Curve |
+| [sRGB-v2-micro.icc](profiles/sRGB-v2-micro.icc?raw=true) | 456 bytes | uRGB | 42-Point Curve |
+| [sRGB-v2-magic.icc](profiles/sRGB-v2-magic.icc?raw=true) | 796 bytes | sRGB | 212-Point Curve |
+| [sRGB-v4.icc](profiles/sRGB-v4.icc?raw=true)             | 480 bytes | sRGB | Parametric Curve |
+|||||
+| [scRGB-v2.icc](profiles/scRGB-v2.icc?raw=true)           | 372 bytes | cRGB | Linear Curve |
 
 ### Greyscale
 
@@ -36,10 +40,10 @@ These are greyscale versions of the sRGB profiles, with the same TRCs and white 
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
-| sGrey-v2-nano.icc  | 290 bytes | nGry | 20-Point Curve |
-| sGrey-v2-micro.icc | 336 bytes | uGry | 42-Point Curve |
-| sGrey-v2-magic.icc | 676 bytes | sGry | 212-Point Curve |
-| sGrey-v4.icc       | 360 bytes | sGry | Parametric Curve |
+| [sGrey-v2-nano.icc](profiles/sGrey-v2-nano.icc?raw=true)   | 290 bytes | nGry | 20-Point Curve |
+| [sGrey-v2-micro.icc](profiles/sGrey-v2-micro.icc?raw=true) | 336 bytes | uGry | 42-Point Curve |
+| [sGrey-v2-magic.icc](profiles/sGrey-v2-magic.icc?raw=true) | 676 bytes | sGry | 212-Point Curve |
+| [sGrey-v4.icc](profiles/sGrey-v4.icc?raw=true)             | 360 bytes | sGry | Parametric Curve |
 
 ### Display P3
 
@@ -53,9 +57,9 @@ These profiles have the red Z value nudged up to 0, with adjustments made to the
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
-| DisplayP3Compat-v2-micro.icc | 456 bytes | uP3C | 42-Point Curve |
-| DisplayP3Compat-v2-magic.icc | 796 bytes | sP3C | 212-Point Curve |
-| DisplayP3Compat-v4.icc       | 480 bytes | sP3C | Parametric Curve |
+| [DisplayP3Compat-v2-micro.icc](profiles/DisplayP3Compat-v2-micro.icc?raw=true) | 456 bytes | uP3C | 42-Point Curve |
+| [DisplayP3Compat-v2-magic.icc](profiles/DisplayP3Compat-v2-magic.icc?raw=true) | 796 bytes | sP3C | 212-Point Curve |
+| [DisplayP3Compat-v4.icc](profiles/DisplayP3Compat-v4.icc?raw=true)             | 480 bytes | sP3C | Parametric Curve |
 
 #### Max-Correctness
 
@@ -63,25 +67,25 @@ These profiles use the correct negative Z value for the profile-adapted red prim
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
-| DisplayP3-v2-micro.icc | 456 bytes | uP3 | 42-Point Curve |
-| DisplayP3-v2-magic.icc | 796 bytes | sP3 | 212-Point Curve |
-| DisplayP3-v4.icc       | 480 bytes | sP3 | Parametric Curve |
+| [DisplayP3-v2-micro.icc](profiles/DisplayP3-v2-micro.icc?raw=true) | 456 bytes | uP3 | 42-Point Curve |
+| [DisplayP3-v2-magic.icc](profiles/DisplayP3-v2-magic.icc?raw=true) | 796 bytes | sP3 | 212-Point Curve |
+| [DisplayP3-v4.icc](profiles/DisplayP3-v4.icc?raw=true)             | 480 bytes | sP3 | Parametric Curve |
 
 ### ProPhoto RGB (ROMM RGB)
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
-| ProPhoto-v2-micro.icc | 496 bytes | uROM | 62-Point Curve |
-| ProPhoto-v2-magic.icc | 756 bytes | ROMM | 192-Point Curve |
-| ProPhoto-v4.icc       | 480 bytes | ROMM | Parametric Curve |
+| [ProPhoto-v2-micro.icc](profiles/ProPhoto-v2-micro.icc?raw=true) | 496 bytes | uROM | 62-Point Curve |
+| [ProPhoto-v2-magic.icc](profiles/ProPhoto-v2-magic.icc?raw=true) | 756 bytes | ROMM | 192-Point Curve |
+| [ProPhoto-v4.icc](profiles/ProPhoto-v4.icc?raw=true)             | 480 bytes | ROMM | Parametric Curve |
 
 ### Rec. 709
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
-| Rec709-v2-micro.icc | 460 bytes | u709 | 44-Point Curve |
-| Rec709-v2-magic.icc | 738 bytes | R709 | 183-Point Curve |
-| Rec709-v4.icc       | 480 bytes | R709 | Parametric Curve |
+| [Rec709-v2-micro.icc](profiles/Rec709-v2-micro.icc?raw=true) | 460 bytes | u709 | 44-Point Curve |
+| [Rec709-v2-magic.icc](profiles/Rec709-v2-magic.icc?raw=true) | 738 bytes | R709 | 183-Point Curve |
+| [Rec709-v4.icc](profiles/Rec709-v4.icc?raw=true)             | 480 bytes | R709 | Parametric Curve |
 
 ### Rec. 2020
 
@@ -93,9 +97,9 @@ These profiles have the red Z value nudged up to 0, with adjustments made to the
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
-| Rec2020Compat-v2-micro.icc | 460 bytes | u20C | 44-Point Curve |
-| Rec2020Compat-v2-magic.icc | 790 bytes | 202C | 209-Point Curve |
-| Rec2020Compat-v4.icc       | 480 bytes | 202C | Parametric Curve |
+| [Rec2020Compat-v2-micro.icc](profiles/Rec2020Compat-v2-micro.icc?raw=true) | 460 bytes | u20C | 44-Point Curve |
+| [Rec2020Compat-v2-magic.icc](profiles/Rec2020Compat-v2-magic.icc?raw=true) | 790 bytes | 202C | 209-Point Curve |
+| [Rec2020Compat-v4.icc](profiles/Rec2020Compat-v4.icc?raw=true)             | 480 bytes | 202C | Parametric Curve |
 
 #### Max-Correctness
 
@@ -103,9 +107,9 @@ These profiles use the correct negative Z value for the profile-adapted red prim
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
-| Rec2020-v2-micro.icc | 460 bytes | u202 | 44-Point Curve |
-| Rec2020-v2-magic.icc | 790 bytes | 2020 | 209-Point Curve |
-| Rec2020-v4.icc       | 480 bytes | 2020 | Parametric Curve |
+| [Rec2020-v2-micro.icc](profiles/Rec2020-v2-micro.icc?raw=true) | 460 bytes | u202 | 44-Point Curve |
+| [Rec2020-v2-magic.icc](profiles/Rec2020-v2-magic.icc?raw=true) | 790 bytes | 2020 | 209-Point Curve |
+| [Rec2020-v4.icc](profiles/Rec2020-v4.icc?raw=true)             | 480 bytes | 2020 | Parametric Curve |
 
 ### Adobe Compatible
 
@@ -115,7 +119,7 @@ The primary colorants and whitepoint values in these profiles were adapted from 
 
 | File Name | File Size | Description String | Color Space |
 |--|--|--|--|
-| AdobeCompat-v2.icc      | 374 bytes | A98C | [Adobe RGB (1998)](https://en.wikipedia.org/wiki/Adobe_RGB_color_space) |
-| AppleCompat-v2.icc      | 374 bytes | AAPL | [Apple RGB](http://www.brucelindbloom.com/WorkingSpaceInfo.html) |
-| ColorMatchCompat-v2.icc | 374 bytes | ACMC | [ColorMatch RGB](http://www.brucelindbloom.com/WorkingSpaceInfo.html) |
-| WideGamutCompat-v2.icc  | 374 bytes | AWGC | [Wide Gamut RGB](https://en.wikipedia.org/wiki/Wide-gamut_RGB_color_space) |
+| [AdobeCompat-v2.icc](profiles/AdobeCompat-v2.icc?raw=true)           | 374 bytes | A98C | [Adobe RGB (1998)](https://en.wikipedia.org/wiki/Adobe_RGB_color_space) |
+| [AppleCompat-v2.icc](profiles/AppleCompat-v2.icc?raw=true)           | 374 bytes | APLC | [Apple RGB](http://www.brucelindbloom.com/WorkingSpaceInfo.html) |
+| [ColorMatchCompat-v2.icc](profiles/ColorMatchCompat-v2.icc?raw=true) | 374 bytes | ACMC | [ColorMatch RGB](http://www.brucelindbloom.com/WorkingSpaceInfo.html) |
+| [WideGamutCompat-v2.icc](profiles/WideGamutCompat-v2.icc?raw=true)   | 374 bytes | AWGC | [Wide Gamut RGB](https://en.wikipedia.org/wiki/Wide-gamut_RGB_color_space) |
