@@ -36,6 +36,7 @@ The scRGB color space uses the same primaries as sRGB but with a linear curve.  
 |||||
 | [scRGB-v2.icc](profiles/scRGB-v2.icc?raw=true)           | 372 bytes | cRGB | Linear Curve |
 
+---
 ### Greyscale
 
 These are greyscale versions of the sRGB profiles, with the same TRCs and white point.
@@ -47,11 +48,14 @@ These are greyscale versions of the sRGB profiles, with the same TRCs and white 
 | [sGrey-v2-magic.icc](profiles/sGrey-v2-magic.icc?raw=true) | 616 bytes | sGry | 182-Point Curve |
 | [sGrey-v4.icc](profiles/sGrey-v4.icc?raw=true)             | 360 bytes | sGry | Parametric Curve |
 
+---
 ### Display P3
 
-The Display P3 color space is based on the [DCI-P3 D65](https://en.wikipedia.org/wiki/DCI-P3) color space but uses an sRGB TRC rather than the standard constant gamma of 2.6.  This color space is [becoming](https://blog.conradchavez.com/2015/10/26/a-look-at-the-p3-color-gamut-of-the-imac-display-retina-late-2015/) [popular](https://www.anandtech.com/show/10265/understanding-the-97-ipad-pros-true-tone-display) as a display profile on newer wide-gamut displays.
+The Display P3 color space is based on the [DCI-P3 D65](https://en.wikipedia.org/wiki/DCI-P3) color space but uses the sRGB transfer function rather than a constant gamma of 2.6.  This color space is [becoming](https://blog.conradchavez.com/2015/10/26/a-look-at-the-p3-color-gamut-of-the-imac-display-retina-late-2015/) [popular](https://developer.android.com/training/wide-color-gamut) as a display profile on newer wide-gamut displays.
 
-Note: The P3 color space requires a negative Z value for the red primary when adapted to the profile illuminant, which is not allowed according the the ICC spec.  While some software will handle the negative value correctly, it may cause issues with software that adheres strictly to the ICC specs, including popular web browsers.  Chrome and Firefox [recently relaxed those restrictions](https://bugzilla.mozilla.org/show_bug.cgi?format=default&id=1250461), but *only on Apple platforms*.
+Note: Apple has shipped at least two versions of their Display P3 profile.  The newer one, dated 2017, uses the sRGB TRC.  The older one, dated 2015, has slightly different values for the linear segment of the curve.  The profiles in this collection use the true sRGB curves as [documented by Apple](https://developer.apple.com/documentation/coregraphics/cgcolorspace/1408916-displayp3) and used by other vendors, such as Adobe.
+
+**Warning**: The P3 color space requires a negative Z value for the red primary when adapted to the profile illuminant, which is not allowed according the the ICC spec.  While some software will handle the negative value correctly, it may cause issues with software that adheres strictly to the ICC specs, including popular web browsers.  Chrome and Firefox [recently relaxed those restrictions](https://bugzilla.mozilla.org/show_bug.cgi?format=default&id=1250461), but *only on Apple platforms*.
 
 #### Max-Compatibility
 
@@ -73,9 +77,10 @@ These profiles use the correct negative Z value for the profile-adapted red prim
 | [DisplayP3-v2-magic.icc](profiles/DisplayP3-v2-magic.icc?raw=true) | 736 bytes | sP3 | 182-Point Curve |
 | [DisplayP3-v4.icc](profiles/DisplayP3-v4.icc?raw=true)             | 480 bytes | sP3 | Parametric Curve |
 
+---
 ### ProPhoto RGB (ROMM RGB)
 
-[ProPhoto](https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space) is an extremely wide gamut color space and should be used only for images encoded with at least 16 bits per pixel.  The `-micro` curve for this color space is larger than others to ensure greater accuracy in these higher bit depth files.
+[ProPhoto](https://en.wikipedia.org/wiki/ProPhoto_RGB_color_space) is an extremely wide gamut color space and should be used only for images encoded with at least 16 bits per channel.  The `-micro` curve for this color space is larger than others to ensure greater accuracy in these higher bit depth files.
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
@@ -83,6 +88,7 @@ These profiles use the correct negative Z value for the profile-adapted red prim
 | [ProPhoto-v2-magic.icc](profiles/ProPhoto-v2-magic.icc?raw=true) | 756 bytes | ROMM | 192-Point Curve |
 | [ProPhoto-v4.icc](profiles/ProPhoto-v4.icc?raw=true)             | 480 bytes | ROMM | Parametric Curve |
 
+---
 ### Rec. 709 (BT.709)
 
 [Rec. 709](https://en.wikipedia.org/wiki/Rec._709) is a color space created for video but occasionally appears in image files.  Note that although the color primaries are *very* similar to sRGB, Rec. 709 uses a different transfer curve, so these color spaces are not interchangeable.
@@ -93,9 +99,10 @@ These profiles use the correct negative Z value for the profile-adapted red prim
 | [Rec709-v2-magic.icc](profiles/Rec709-v2-magic.icc?raw=true) | 738 bytes | R709 | 183-Point Curve |
 | [Rec709-v4.icc](profiles/Rec709-v4.icc?raw=true)             | 480 bytes | R709 | Parametric Curve |
 
+---
 ### Rec. 2020
 
-Note: The [Rec. 2020](https://en.wikipedia.org/wiki/Rec._2020) color space requires a negative Z value for the red primary when adapted to the profile illuminant, which is not allowed according to the ICC spec.  While some software will handle the negative value correctly, it may cause issues with software that adheres strictly to the ICC specs, including popular web browsers.  Chrome and Firefox [recently relaxed those restrictions](https://bugzilla.mozilla.org/show_bug.cgi?format=default&id=1250461), but *only on Apple platforms*.
+**Warning**: The [Rec. 2020](https://en.wikipedia.org/wiki/Rec._2020) color space requires a negative Z value for the red primary when adapted to the profile illuminant, which is not allowed according to the ICC spec.  While some software will handle the negative value correctly, it may cause issues with software that adheres strictly to the ICC specs, including popular web browsers.  Chrome and Firefox [recently relaxed those restrictions](https://bugzilla.mozilla.org/show_bug.cgi?format=default&id=1250461), but *only on Apple platforms*.
 
 #### Max-Compatibility
 
@@ -117,6 +124,7 @@ These profiles use the correct negative Z value for the profile-adapted red prim
 | [Rec2020-v2-magic.icc](profiles/Rec2020-v2-magic.icc?raw=true) | 790 bytes | 2020 | 209-Point Curve |
 | [Rec2020-v4.icc](profiles/Rec2020-v4.icc?raw=true)             | 480 bytes | 2020 | Parametric Curve |
 
+---
 ### Adobe Compatible
 
 These profiles are compact versions of commonly used Adobe-created color spaces.  Because these color spaces all use constant gamma values, the Adobe versions of the profiles are quite small.  However, with custom packing and abbreviated text tags, these profiles are almost 200 bytes smaller.  They are also free of the license restrictions that burden Adobe's versions of the profiles.
