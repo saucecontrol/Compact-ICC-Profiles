@@ -10,7 +10,7 @@ Details on the process used for creating these profiles can be found [here](http
 Conventions
 -----------
 
-For color spaces that use a constant gamma value, only a single ICC V2 profile is provided.  V4 profiles offer no accuracy advantage in this case, V2 profiles can be made smaller, and V2 has better software support.
+For color spaces that use a constant gamma value, profiles are provided in both ICC V2 and V4 versions (with the exception of HDR video color spaces, which are V4 only).  V2 profiles can be made smaller, and V2 has better software support, but V4 allows for a slight increase in the gamma precision.  For example, the Adobe RGB color space specifies a gamma of 2.2.  Encoded in a V2 profile, this is represented as 2+51/256 (2.199219), in V4 profiles it is represented as 2+13107/65536 (2.199997), at a cost of 90 extra bytes.
 
 For color spaces that have complex tone reproduction curves (TRCs), I have provided multiple options.  These color spaces are best represented using the newer V4 parametric curve type, so if you know the software reading the image is V4 compatible, those are the best choice.  For the V2 profiles, I have created two variants: `-micro` and `-magic`.
 
@@ -59,7 +59,7 @@ Note: Apple has shipped at least two versions of their Display P3 profile.  The 
 
 #### Max-Compatibility
 
-These profiles have the red Z value nudged up to 0, with adjustments made to the other colors to compensate and restore balance.  Use these if you're not sure of compatibility or if the images are intended to be displayed in a web browser.
+These profiles have the red Z value nudged up to 0, with adjustments made to the other colors and chromatic adaptation tags to compensate and restore balance.  Use these if you're not sure of compatibility or if the images are intended to be displayed in a web browser.
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
@@ -77,6 +77,14 @@ These profiles use the correct negative Z value for the profile-adapted red prim
 | [DisplayP3-v2-magic.icc](profiles/DisplayP3-v2-magic.icc?raw=true) | 736 bytes | sP3 | 182-Point Curve |
 | [DisplayP3-v4.icc](profiles/DisplayP3-v4.icc?raw=true)             | 480 bytes | sP3 | Parametric Curve |
 
+#### DCI-P3
+
+This profile defines a constant gamma of 2.6 and the P3 Theater whitepoint (x=0.314,y=0.351).  It is intended only for video use at high bit depths (HDR).
+
+| File Name | File Size | Description String | Notes |
+|--|--|--|--|
+| [DCI-P3-v4.icc](profiles/DCI-P3-v4.icc?raw=true) | 464 bytes | TP3 | Gamma 2.6 |
+
 ---
 ### ProPhoto RGB (ROMM RGB)
 
@@ -91,7 +99,7 @@ These profiles use the correct negative Z value for the profile-adapted red prim
 ---
 ### Rec. 709 (BT.709)
 
-[Rec. 709](https://en.wikipedia.org/wiki/Rec._709) is a color space created for video but occasionally appears in image files.  Note that although the color primaries are *very* similar to sRGB, Rec. 709 uses a different transfer curve, so these color spaces are not interchangeable.
+[Rec. 709](https://en.wikipedia.org/wiki/Rec._709) is a color space created for video but occasionally appears in image files.  Note that although the color primaries are nearly identical to sRGB, Rec. 709 uses a different transfer curve, so these color spaces are not interchangeable.
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
@@ -106,7 +114,7 @@ These profiles use the correct negative Z value for the profile-adapted red prim
 
 #### Max-Compatibility
 
-These profiles have the red Z value nudged up to 0, with adjustments made to the other colors to compensate and restore balance.  Use these if you're not sure of compatibility or if the images are intended to be displayed in a web browser.
+These profiles have the red Z value nudged up to 0, with adjustments made to the other colors and chromatic adaptation tags to compensate and restore balance.  Use these if you're not sure of compatibility or if the images are intended to be displayed in a web browser.
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
@@ -124,6 +132,14 @@ These profiles use the correct negative Z value for the profile-adapted red prim
 | [Rec2020-v2-magic.icc](profiles/Rec2020-v2-magic.icc?raw=true) | 790 bytes | 2020 | 209-Point Curve |
 | [Rec2020-v4.icc](profiles/Rec2020-v4.icc?raw=true)             | 480 bytes | 2020 | Parametric Curve |
 
+#### Bonus - Gamma 2.4
+
+This profile uses a constant gamma of 2.4 instead of the transfer function given by the standard.  The spec defines a gamma of 2.4 for the reference display device, but this should be almost certainly *not* be used for encoding outside high bit depth uses (maybe HDR video).  There are a few profiles like this floating around the interwebs, so here's another, but smaller 🤷‍♂️
+
+| File Name | File Size | Description String | Notes |
+|--|--|--|--|
+| [Rec2020-g24-v4.icc](profiles/Rec2020-g24-v4.icc?raw=true) | 464 bytes | 2024 | Gamma 2.4 |
+
 ---
 ### Adobe Compatible
 
@@ -134,6 +150,10 @@ The primary colorants and whitepoint values in these profiles were adapted from 
 | File Name | File Size | Description String | Color Space |
 |--|--|--|--|
 | [AdobeCompat-v2.icc](profiles/AdobeCompat-v2.icc?raw=true)           | 374 bytes | A98C | [Adobe RGB (1998)](https://en.wikipedia.org/wiki/Adobe_RGB_color_space) |
+| [AdobeCompat-v4.icc](profiles/AdobeCompat-v4.icc?raw=true)           | 464 bytes | A98C |  |
 | [AppleCompat-v2.icc](profiles/AppleCompat-v2.icc?raw=true)           | 374 bytes | APLC | [Apple RGB](http://www.brucelindbloom.com/WorkingSpaceInfo.html) |
+| [AppleCompat-v4.icc](profiles/AppleCompat-v4.icc?raw=true)           | 464 bytes | APLC |  |
 | [ColorMatchCompat-v2.icc](profiles/ColorMatchCompat-v2.icc?raw=true) | 374 bytes | ACMC | [ColorMatch RGB](http://www.brucelindbloom.com/WorkingSpaceInfo.html) |
+| [ColorMatchCompat-v4.icc](profiles/ColorMatchCompat-v4.icc?raw=true) | 464 bytes | ACMC |  |
 | [WideGamutCompat-v2.icc](profiles/WideGamutCompat-v2.icc?raw=true)   | 374 bytes | AWGC | [Wide Gamut RGB](https://en.wikipedia.org/wiki/Wide-gamut_RGB_color_space) |
+| [WideGamutCompat-v4.icc](profiles/WideGamutCompat-v4.icc?raw=true)   | 464 bytes | AWGC |  |
