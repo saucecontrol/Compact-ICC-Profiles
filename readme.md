@@ -21,7 +21,7 @@ Profiles in this Collection
 
 ### sRGB/scRGB
 
-These profiles are defined using the true sRGB primaries, as defined in both the sRGB and scRGB standards, using the process defined in the [ICC's extension spec for sRGB profile makers](http://www.color.org/chardata/rgb/sRGB.pdf).  The values in these profiles differ very slightly from those in profiles derived from the Rec. 709 primaries, which are commonly given as sRGB.
+These profiles are defined using the true sRGB primaries, as defined in both the sRGB and scRGB standards, using the process defined in the [ICC's extension spec for sRGB profile makers](https://www.color.org/chardata/rgb/sRGB.pdf).  The values in these profiles differ very slightly from those in profiles derived from the Rec. 709 primaries, which are commonly given as sRGB.
 
 In addition to the usual V2 variants, I have created a `-nano` version of the sRGB profile.  This was done partially as an exercise to determine the minimum size for a useable sRGB-compatible profile and partially because sRGB is a special case where an extra-small profile may be useful.
 
@@ -33,13 +33,13 @@ The scRGB color space uses the same primaries as sRGB but with a linear curve.  
 | [sRGB-v2-micro.icc](profiles/sRGB-v2-micro.icc?raw=true) | 456 bytes | uRGB | 42-Point Curve |
 | [sRGB-v2-magic.icc](profiles/sRGB-v2-magic.icc?raw=true) | 736 bytes | sRGB | 182-Point Curve |
 | [sRGB-v4.icc](profiles/sRGB-v4.icc?raw=true)             | 480 bytes | sRGB | Parametric Curve |
-|||||
+|  |  |  |  |
 | [scRGB-v2.icc](profiles/scRGB-v2.icc?raw=true)           | 372 bytes | cRGB | Linear Curve |
 
 ---
 ### Greyscale
 
-These are greyscale versions of the sRGB profiles, with the same TRCs and white point.
+These are greyscale versions of the sRGB profiles, with the same TRC and white point.
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
@@ -147,9 +147,9 @@ These profiles use the correct negative Z value for the profile-adapted red prim
 | [Rec2020-v2-magic.icc](profiles/Rec2020-v2-magic.icc?raw=true) | 790 bytes | 2020 | 209-Point Curve |
 | [Rec2020-v4.icc](profiles/Rec2020-v4.icc?raw=true)             | 480 bytes | 2020 | Parametric Curve |
 
-#### Bonus - Gamma 2.4
+#### Gamma 2.4
 
-This profile uses a constant gamma of 2.4 instead of the transfer function given by the standard.  The spec defines a gamma of 2.4 for the reference display device, but this should be almost certainly *not* be used for encoding outside high bit depth uses (maybe HDR video).  There are a few profiles like this floating around the interwebs, so here's another, but smaller 🤷‍♂️
+This profile uses a constant gamma of 2.4 instead of the transfer function given by the standard, which matches that of Rec. 709.  The standard defines a gamma of 2.4 for the reference display device, so some applications use gamma 2.4 encoding to match.
 
 | File Name | File Size | Description String | Notes |
 |--|--|--|--|
@@ -177,3 +177,18 @@ The V4 profiles in this section encode the gamma value using the newer parametri
 |  |  |  |  |
 | [WideGamutCompat-v2.icc](profiles/WideGamutCompat-v2.icc?raw=true)   | 374 bytes | AWGC | [Wide Gamut RGB](https://en.wikipedia.org/wiki/Wide-gamut_RGB_color_space) |
 | [WideGamutCompat-v4.icc](profiles/WideGamutCompat-v4.icc?raw=true)   | 464 bytes | AWGC |  |
+
+---
+### CMYK
+
+Unlike RGB profiles, which need only define 3 primary colorant triplets and a single shared curve, CMYK profiles typically contain multiple complex transforms -- each of which consists of a 3x3 matrix, a set of distinct input curves per channel, an N-dimensional mapping table, and separate output curves per channel.  It is not uncommon for CMYK ICC profiles to be in the range of 500KB to 4MB, or more.
+
+While the different structure of CMYK profiles makes it impossible to achieve the same small file sizes as we can for RGB profiles, it is possible to trim a CMYK profile down to the minimum required for a specific use.  Since the main purpose of the profiles in this collection is to enable correct display of images on a screen, I have included one such CMYK profile for that purpose.
+
+This profile contains only the `A2B0` mapping tag, which defines a perceptual intent mapping from the source CMYK space.  The mapping is based on the [CGATS TR 001-1995](https://www.color.org/chardata/CGATS_TR_001.xalter) characterization data, with the gamut stretched to D50 white and black.  The primary purpose of this profile is to serve as a default for image viewing or conversion software to use when a CMYK image does not contain an embedded profile.  It cannot be used for conversion *to* CMYK or for other rendering intents.
+
+The perceptual mapping is modeled on the appearance of Adobe's `U.S. Web Coated (SWOP) v2` profile, which is the long-time Photoshop default for North American users -- though it is not intended to be a direct replacement for the Adobe profile.  Due to the small size of the 4D LUT, this profile will not match the Adobe profile's output exactly, but it should give a correct overall appearance to an image when converted for display.
+
+| File Name | File Size | Description String | Notes |
+|--|--|--|--|
+| [CGATS001Compat-v2-micro.icc](profiles/CGATS001Compat-v2-micro.icc?raw=true) | 8464 bytes | uCMY | 48-Point Input Curves, 6-Point 4D LUT |
