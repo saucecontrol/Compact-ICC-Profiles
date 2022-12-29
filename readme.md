@@ -55,17 +55,7 @@ The Display P3 color space is based on the [DCI-P3 D65](https://en.wikipedia.org
 
 Note: Apple has shipped at least two versions of their Display P3 profile.  The newer one, dated 2017, uses the sRGB TRC.  The older one, dated 2015, has slightly different values for the linear segment of the curve.  The profiles in this collection use the true sRGB curves as [documented by Apple](https://developer.apple.com/documentation/coregraphics/cgcolorspace/1408916-displayp3) and used by other vendors, such as Adobe.
 
-**Warning**: The P3 color space requires a negative Z value for the red primary when adapted to the profile illuminant, which is not allowed according the the ICC spec.  While some software will handle the negative value correctly, it may cause issues with software that adheres strictly to the ICC specs, including popular web browsers.  Chrome and Firefox [recently relaxed those restrictions](https://bugzilla.mozilla.org/show_bug.cgi?format=default&id=1250461), but *only on Apple platforms*.
-
-#### Max-Compatibility
-
-These profiles have the red Z value nudged up to 0, with adjustments made to the other colors and chromatic adaptation tags to compensate and restore balance.  Use these if you're not sure of compatibility or if the images are intended to be displayed in a web browser.
-
-| File Name | File Size | Description String | Notes |
-|--|--|--|--|
-| [DisplayP3Compat-v2-micro.icc](profiles/DisplayP3Compat-v2-micro.icc?raw=true) | 456 bytes | uP3C | 42-Point Curve |
-| [DisplayP3Compat-v2-magic.icc](profiles/DisplayP3Compat-v2-magic.icc?raw=true) | 736 bytes | sP3C | 182-Point Curve |
-| [DisplayP3Compat-v4.icc](profiles/DisplayP3Compat-v4.icc?raw=true)             | 480 bytes | sP3C | Parametric Curve |
+**Warning**: The P3 color space requires a negative Z value for the red primary when adapted to the profile illuminant, which is not allowed according the the ICC spec.  While some software will handle the negative value correctly, it may cause issues with software that adheres strictly to the ICC specs.
 
 #### Max-Correctness
 
@@ -76,6 +66,16 @@ These profiles use the correct negative Z value for the profile-adapted red prim
 | [DisplayP3-v2-micro.icc](profiles/DisplayP3-v2-micro.icc?raw=true) | 456 bytes | uP3 | 42-Point Curve |
 | [DisplayP3-v2-magic.icc](profiles/DisplayP3-v2-magic.icc?raw=true) | 736 bytes | sP3 | 182-Point Curve |
 | [DisplayP3-v4.icc](profiles/DisplayP3-v4.icc?raw=true)             | 480 bytes | sP3 | Parametric Curve |
+
+#### Max-Compatibility
+
+These profiles have the red Z value nudged up to 0, with adjustments made to the other colors and chromatic adaptation tags to compensate and restore balance.  Use these if you're not sure of software compatibility.
+
+| File Name | File Size | Description String | Notes |
+|--|--|--|--|
+| [DisplayP3Compat-v2-micro.icc](profiles/DisplayP3Compat-v2-micro.icc?raw=true) | 456 bytes | uP3C | 42-Point Curve |
+| [DisplayP3Compat-v2-magic.icc](profiles/DisplayP3Compat-v2-magic.icc?raw=true) | 736 bytes | sP3C | 182-Point Curve |
+| [DisplayP3Compat-v4.icc](profiles/DisplayP3Compat-v4.icc?raw=true)             | 480 bytes | sP3C | Parametric Curve |
 
 #### DCI-P3
 
@@ -125,17 +125,7 @@ This profile defines a constant gamma of 2.6 and the P3 Theater whitepoint (x=0.
 ---
 ### Rec. 2020
 
-**Warning**: The [Rec. 2020](https://en.wikipedia.org/wiki/Rec._2020) color space requires a negative Z value for the red primary when adapted to the profile illuminant, which is not allowed according to the ICC spec.  While some software will handle the negative value correctly, it may cause issues with software that adheres strictly to the ICC specs, including popular web browsers.  Chrome and Firefox [recently relaxed those restrictions](https://bugzilla.mozilla.org/show_bug.cgi?format=default&id=1250461), but *only on Apple platforms*.
-
-#### Max-Compatibility
-
-These profiles have the red Z value nudged up to 0, with adjustments made to the other colors and chromatic adaptation tags to compensate and restore balance.  Use these if you're not sure of compatibility or if the images are intended to be displayed in a web browser.
-
-| File Name | File Size | Description String | Notes |
-|--|--|--|--|
-| [Rec2020Compat-v2-micro.icc](profiles/Rec2020Compat-v2-micro.icc?raw=true) | 460 bytes | u20C | 44-Point Curve |
-| [Rec2020Compat-v2-magic.icc](profiles/Rec2020Compat-v2-magic.icc?raw=true) | 790 bytes | 202C | 209-Point Curve |
-| [Rec2020Compat-v4.icc](profiles/Rec2020Compat-v4.icc?raw=true)             | 480 bytes | 202C | Parametric Curve |
+**Warning**: The [Rec. 2020](https://en.wikipedia.org/wiki/Rec._2020) color space requires a negative Z value for the red primary when adapted to the profile illuminant, which is not allowed according to the ICC spec.  While some software will handle the negative value correctly, it may cause issues with software that adheres strictly to the ICC specs.
 
 #### Max-Correctness
 
@@ -146,6 +136,16 @@ These profiles use the correct negative Z value for the profile-adapted red prim
 | [Rec2020-v2-micro.icc](profiles/Rec2020-v2-micro.icc?raw=true) | 460 bytes | u202 | 44-Point Curve |
 | [Rec2020-v2-magic.icc](profiles/Rec2020-v2-magic.icc?raw=true) | 790 bytes | 2020 | 209-Point Curve |
 | [Rec2020-v4.icc](profiles/Rec2020-v4.icc?raw=true)             | 480 bytes | 2020 | Parametric Curve |
+
+#### Max-Compatibility
+
+These profiles have the red Z value nudged up to 0, with adjustments made to the other colors and chromatic adaptation tags to compensate and restore balance.  Use these if you're not sure of software compatibility.
+
+| File Name | File Size | Description String | Notes |
+|--|--|--|--|
+| [Rec2020Compat-v2-micro.icc](profiles/Rec2020Compat-v2-micro.icc?raw=true) | 460 bytes | u20C | 44-Point Curve |
+| [Rec2020Compat-v2-magic.icc](profiles/Rec2020Compat-v2-magic.icc?raw=true) | 790 bytes | 202C | 209-Point Curve |
+| [Rec2020Compat-v4.icc](profiles/Rec2020Compat-v4.icc?raw=true)             | 480 bytes | 202C | Parametric Curve |
 
 #### Gamma 2.4
 
