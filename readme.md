@@ -1,7 +1,7 @@
 Compact ICC Profiles
 ====================
 
-The ICC profiles in this collection contain the minimum tags necessary to correctly represent a color space and, in the case of ICC V2 profiles, use custom packing to mimimize file size.  These profiles are intended for embedding in image files or software where the size of the profile is a consideration.
+The ICC profiles in this collection contain the minimum tags necessary to correctly represent a color space and, in the case of ICC V2 profiles, use custom packing to minimize file size.  These profiles are intended for embedding in image files or software where the size of the profile is a consideration.
 
 Profile description and copyright text are minimal.  All profiles in this collection are released to the public domain under the Creative Commons CC0 license.  They are free from restrictions on distribution and use to the extent allowed by law.
 
@@ -55,7 +55,7 @@ The Display P3 color space is based on the [DCI-P3 D65](https://en.wikipedia.org
 
 Note: Apple has shipped at least two versions of their Display P3 profile.  The newer one, dated 2017, uses the sRGB TRC.  The older one, dated 2015, has slightly different values for the linear segment of the curve.  The profiles in this collection use the true sRGB curves as [documented by Apple](https://developer.apple.com/documentation/coregraphics/cgcolorspace/1408916-displayp3) and used by other vendors, such as Adobe.
 
-**Warning**: The P3 color space requires a negative Z value for the red primary when adapted to the profile illuminant, which is not allowed according the the ICC spec.  While some software will handle the negative value correctly, it may cause issues with software that adheres strictly to the ICC specs.
+**Warning**: The P3 color space requires a negative Z value for the red primary when adapted to the profile illuminant, which is not allowed according the ICC spec.  While some software will handle the negative value correctly, it may cause issues with software that adheres strictly to the ICC specs.
 
 #### Max-Correctness
 
@@ -162,21 +162,21 @@ These profiles are compact versions of commonly used Adobe-created color spaces.
 
 The primary colorants and whitepoint values in these profiles were adapted from the published x,y chromaticity coordinates and then tested for compatibility with the Adobe profiles.  Most of Adobe's ICC profiles are [well-behaved](https://ninedegreesbelow.com/photography/well-behaved-profile.html), but in cases where they are not, these compatible profiles have very slightly different primaries to bring them into balance.  No values deviate from those in the Adobe profiles by more than 1/2<sup>16</sup>.
 
-The V4 profiles in this section encode the gamma value using the newer parametric curve tag, allowing for a slight increase in precision.  For example, the Adobe RGB (1998) color space specification defines a gamma of precisely 2.19921875 (2+51/256), which is the nearest value to an ideal gamma of 2.2 that could be represented in a V2 profile.  V4 profiles allow encoding 2.2 gamma as 2.19999695 (2+13107/65536).  As the Adobe color spaces were originally defined in terms of V2 profiles, this additional precision may not be desireable, but I have provided them nonetheless.  Otherwise, the V4 profiles are larger with no real benefit.
+The V4 profiles in this section encode the gamma value using the newer parametric curve tag, allowing for a slight increase in precision.  For example, the [Adobe RGB (1998) color space specification](https://www.adobe.com/digitalimag/pdfs/AdobeRGB1998.pdf) defines a gamma of precisely 2.19921875 (2+51/256), which is the nearest value to an ideal gamma of 2.2 that could be represented in a V2 profile.  V4 profiles allow encoding 2.2 gamma as 2.19999695 (2+13107/65536).  These profiles also include the slope limiting function recommended by Adobe (see Adobe RGB spec, Annex C) and implemented in the Adobe Color Engine.  The V4 profiles may give better conversion results when used with software that does not implement slope limiting internally.
 
 | File Name | File Size | Description String | Color Space |
 |--|--|--|--|
 | [AdobeCompat-v2.icc](profiles/AdobeCompat-v2.icc?raw=true)           | 374 bytes | A98C | [Adobe RGB (1998)](https://en.wikipedia.org/wiki/Adobe_RGB_color_space) |
-| [AdobeCompat-v4.icc](profiles/AdobeCompat-v4.icc?raw=true)           | 464 bytes | A98C |  |
+| [AdobeCompat-v4.icc](profiles/AdobeCompat-v4.icc?raw=true)           | 480 bytes | A98C |  |
 |  |  |  |  |
 | [AppleCompat-v2.icc](profiles/AppleCompat-v2.icc?raw=true)           | 374 bytes | APLC | [Apple RGB](http://www.brucelindbloom.com/WorkingSpaceInfo.html) |
-| [AppleCompat-v4.icc](profiles/AppleCompat-v4.icc?raw=true)           | 464 bytes | APLC |  |
+| [AppleCompat-v4.icc](profiles/AppleCompat-v4.icc?raw=true)           | 480 bytes | APLC |  |
 |  |  |  |  |
 | [ColorMatchCompat-v2.icc](profiles/ColorMatchCompat-v2.icc?raw=true) | 374 bytes | ACMC | [ColorMatch RGB](http://www.brucelindbloom.com/WorkingSpaceInfo.html) |
-| [ColorMatchCompat-v4.icc](profiles/ColorMatchCompat-v4.icc?raw=true) | 464 bytes | ACMC |  |
+| [ColorMatchCompat-v4.icc](profiles/ColorMatchCompat-v4.icc?raw=true) | 480 bytes | ACMC |  |
 |  |  |  |  |
 | [WideGamutCompat-v2.icc](profiles/WideGamutCompat-v2.icc?raw=true)   | 374 bytes | AWGC | [Wide Gamut RGB](https://en.wikipedia.org/wiki/Wide-gamut_RGB_color_space) |
-| [WideGamutCompat-v4.icc](profiles/WideGamutCompat-v4.icc?raw=true)   | 464 bytes | AWGC |  |
+| [WideGamutCompat-v4.icc](profiles/WideGamutCompat-v4.icc?raw=true)   | 480 bytes | AWGC |  |
 
 ---
 ### CMYK
